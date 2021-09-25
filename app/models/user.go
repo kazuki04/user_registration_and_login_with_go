@@ -1,18 +1,19 @@
 package models
 
 import (
-	"gorm.io/gorm"
-
-	"gorm.io/driver/mysql"
+	"time"
 )
 
 type User struct {
-	Name  string
-	Email string
-	gorm.Model
+	ID        uint `gorm:"primaryKey"`
+	Name      string
+	Email     string
+	CreatedAt time.Time
+	UpdatedAt time.Time
 }
 
-func (u *User) create() {
+func (u *User) create() *User {
 	u = &User{Name: u.Name, Email: u.Email}
-	result := db.Create(u)
+	DbConnection.Create(u)
+	return u
 }
