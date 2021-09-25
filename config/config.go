@@ -1,4 +1,4 @@
-package utils
+package config
 
 import (
 	"fmt"
@@ -7,7 +7,7 @@ import (
 )
 
 type ConfigList struct {
-	Port int
+	Port string
 }
 
 var Config ConfigList
@@ -19,6 +19,6 @@ func init() {
 		os.Exit(1)
 	}
 	Config = ConfigList{
-		Port: cfg.Section("web").Key("port").MustInt(),
+		Port: cfg.Section("web").Key("port").String(),
 	}
 }
