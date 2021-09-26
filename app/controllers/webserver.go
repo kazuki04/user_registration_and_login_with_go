@@ -7,7 +7,7 @@ import (
 	"net/http"
 )
 
-var templates = template.Must(template.ParseFiles("app/views/users/new.html"))
+var templates = template.Must(template.ParseFiles("app/views/users/new.html", "app/views/users/registered.html"))
 
 func makeHandler(fn func(r http.ResponseWriter, w *http.Request)) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
@@ -21,5 +21,6 @@ func newHandler(w http.ResponseWriter, r *http.Request) {
 
 func StartWebServer() error {
 	http.HandleFunc("/new/", makeHandler(newHandler))
+	http.HandleFunc("/save/", makeHandler(userSignUp))
 	return http.ListenAndServe(fmt.Sprintf(":%s", config.Config.Port), nil)
 }
