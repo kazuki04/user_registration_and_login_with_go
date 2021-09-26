@@ -14,7 +14,7 @@ type User struct {
 }
 
 func (u *User) Save() *User {
-	u = &User{Name: u.Name, Email: u.Email}
+	u = &User{Name: u.Name, Email: u.Email, Password: u.Password}
 	DbConnection.Create(u)
 	return u
 }
