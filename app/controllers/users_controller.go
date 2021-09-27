@@ -2,7 +2,6 @@ package controllers
 
 import (
 	// "encoding/json"
-	"fmt"
 	"log"
 	"net/http"
 
@@ -15,10 +14,7 @@ func userSignUp(w http.ResponseWriter, r *http.Request) {
 	// var user models.User
 	// json.NewDecoder(r.Body).Decode(&user)
 	user := &models.User{Name: r.FormValue("name"), Email: r.FormValue("email"), Password: r.FormValue("password")}
-	fmt.Println(r.FormValue("password"))
-	fmt.Println(user.Password)
 	user.Password = getHash([]byte(user.Password))
-	fmt.Println(user.Password)
 	user.Save()
 	// if user.Save().Error != nil {
 	// 	return
